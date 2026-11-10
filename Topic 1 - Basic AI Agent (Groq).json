@@ -1,0 +1,96 @@
+{
+  "name": "Topic 1 - Basic AI Agent (Groq)",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "c72c7b1e-6311-4822-a39c-43ae76d8273e",
+      "name": "When chat message received",
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        0,
+        0
+      ],
+      "webhookId": "2fcb7ad0-aeb8-4fa9-ae53-02dcbcb7f001"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.chatInput }}",
+        "options": {
+          "systemMessage": "You are a helpful AI assistant. Follow the user's instructions clearly and concisely. If asked to introduce yourself in exactly one sentence, reply with exactly one sentence."
+        }
+      },
+      "id": "8297309b-cc15-4e84-ac57-778b9bbbc366",
+      "name": "AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        272,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "model": "openai/gpt-oss-20b",
+        "options": {
+          "temperature": 0
+        }
+      },
+      "id": "722055a0-2a0d-4895-ac77-281238011a68",
+      "name": "Groq Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        272,
+        224
+      ],
+      "credentials": {
+        "groqApi": {
+          "id": "3xMM17Qgxo47Lywj",
+          "name": "Groq account 6"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "2f9467bb-fe73-4f90-9ebd-806091baf182",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "a03c7678428ef19ededbf912f16f7d5798ec7b9ab4c17f2a2def6a9e791e7215"
+  },
+  "nodeGroups": [],
+  "id": "5sgcJvDF2YnCVmCC",
+  "tags": []
+}
